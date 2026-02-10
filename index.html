@@ -8,9 +8,18 @@
   <style>
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
+  min-height:100vh;
+
+  background-image:url("inicio.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
   overflow-x:hidden;
-  background:radial-gradient(circle at top,#ff9a9e,#fad0c4);
   text-align:center;
   color:#333;
 }
@@ -37,8 +46,14 @@ body::before{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  color:white;
-  padding:20px;
+  color:blue;
+  padding:30px;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 40px #ff1493;
 }
 
 .start h1{
@@ -53,13 +68,19 @@ body::before{
 
 button{
   padding:14px 24px;
-  font-size:18px;
+  font-size:28px;
   border:none;
   border-radius:10px;
   background:#ff6b81;
-  color:white;
+  color:blue;
   cursor:pointer;
   margin-top:20px;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 40px #ff1493;
 }
 
 /* ESCENA */
@@ -74,12 +95,20 @@ button{
   width:90%;
   max-width:500px;
   height:220px;
-  background:white;
+  background:linear-gradient(145deg, #ff8c00, #ff5e00);
   margin:40px auto;
   border-radius:12px;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
   overflow:hidden;
   cursor:pointer;
+
+  /* brillo */
+  box-shadow:
+    0 0 15px rgba(255,140,0,0.8),
+    0 0 30px rgba(255,94,0,0.6),
+    0 0 45px rgba(255,94,0,0.4);
+
+  animation:glow 2s ease-in-out infinite alternate;
 }
 
 .flap{
@@ -158,27 +187,57 @@ button{
 /* FINAL */
 .end{
   font-size:22px;
-  color:white;
+  color:blue;
   margin:40px 0 80px 0;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 40px #ff1493;
 }
 .open-text{
   position:absolute;
+  bottom:15px;
   width:100%;
   text-align:center;
-  top:60%;
-  transform:translateY(-50%);
-  font-size:22px;
   font-weight:bold;
-  color:blue;
-  text-shadow:0 2px 6px rgba(0,0,0,0.5);
+  color:white;
+  text-shadow:0 2px 5px rgba(0,0,0,0.4);
   animation:pulse 1.5s infinite;
-  pointer-events:none; /* importante */
+  pointer-events:none;
 }
+
 
 @keyframes pulse{
   0%{ transform:translateY(-50%) scale(1); }
   50%{ transform:translateY(-50%) scale(1.1); }
   100%{ transform:translateY(-50%) scale(1); }
+}
+
+.ribbon{
+  position:absolute;
+  width:140%;
+  height:18px;
+  background:white;
+  top:50%;
+  left:-20%;
+}
+
+.ribbon1{
+  transform:rotate(45deg);
+}
+
+.ribbon2{
+  transform:rotate(-45deg);
+}
+
+.heart-center{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-size:38px;
+  z-index:2;
 }
 
 
@@ -189,17 +248,21 @@ button{
 
 <!-- INICIO -->
 <div class="start" id="start">
-  <h1>Ema Román Ortuño ❤️</h1>
-  <p>Preparé algo que nace de mi corazón…</p>
-  <button onclick="begin()">Abrir mi sorpresa</button>
+  <h1>FELIZ DIA DE SAN VALENTIN ❤️</h1>
+
+  <h2>Preparé algo que nace de mi corazón…</h2>
+  <button onclick="begin()">Abre la sorpresa</button>
 </div>
 
 <!-- ESCENA -->
 <div class="scene" id="scene">
 
   <div class="envelope" onclick="openLetter(this)">
-    <div class="open-text">ABRE AQUÍ ❤️</div>
-    <div class="flap"></div>
+    <div class="ribbon ribbon1"></div>
+    <div class="ribbon ribbon2"></div>
+
+    <div class="heart-center">❤️</div>
+    <div class="open-text">ABRE AQUÍ</div>
   </div>
 
   <div class="letter" id="letter">
@@ -228,7 +291,7 @@ button{
   </div>
 
   <div class="end">
-    Gracias por abrir mi corazón ✨
+    <h3>Gracias por todo tu amor ✨</h3>
   </div>
 
 </div>
