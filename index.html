@@ -3,57 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Ema ❤️</title>
+<title>PARA EL AMOR DE MI VIDA EMA ❤️</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
   background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* INICIO */
+.start{
+  height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  text-align:center;
-  overflow:auto; /* ahora sí permite scroll */
-}
-
-/* Inicio */
-.start{ color:white; }
-
-.start h1{
-  font-size:34px;
-  margin-bottom:10px;
-}
-
-button{
-  padding:12px 22px;
-  font-size:16px;
-  border:none;
-  border-radius:8px;
-  background:#ff6b81;
   color:white;
-  cursor:pointer;
-}
-
-/* Escena */
-.scene{ 
-  display:none; 
-  width:100%;
   padding:20px;
 }
 
-/* Sobre */
+.start h1{
+  font-size:36px;
+}
+
+button{
+  padding:14px 24px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  background:#ff6b81;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+/* ESCENA */
+.scene{
+  display:none;
+  width:100%;
+}
+
+/* SOBRE */
 .envelope{
   position:relative;
-  width:340px;
+  width:90%;
+  max-width:500px;
   height:220px;
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  cursor:pointer;
-  overflow:hidden;
+  background:white;
   margin:40px auto;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  overflow:hidden;
+  cursor:pointer;
 }
 
 .flap{
@@ -66,30 +70,39 @@ button{
   z-index:2;
 }
 
-.letter{
-  position:relative;
-  width:100%;
-  background:white;
-  padding:15px;
-  box-sizing:border-box;
-  transform:translateY(120%);
-  transition:0.8s;
-  font-size:14px;
-  border-radius:10px;
-  margin-top:10px;
+.envelope.open .flap{
+  transform:translateY(-100%);
 }
 
-.envelope.open .flap{ transform:translateY(-100%); }
-.envelope.open + .letter{ transform:translateY(0); }
+/* CARTA */
+.letter{
+  width:90%;
+  max-width:500px;
+  margin:20px auto 60px auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transform:translateY(50px);
+  opacity:0;
+  transition:0.8s;
+  font-size:16px;
+  line-height:1.5;
+}
 
-/* Foto */
+.letter.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* FOTO */
 .photo{
   width:100%;
-  border-radius:10px;
-  margin-bottom:10px;
+  border-radius:12px;
+  margin-bottom:15px;
 }
 
-/* Corazones */
+/* CORAZONES */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -105,14 +118,14 @@ button{
 
 <body>
 
-<!-- Inicio -->
+<!-- INICIO -->
 <div class="start" id="start">
   <h1>Ema Román Ortuño ❤️</h1>
-  <p>Preparé algo hermoso para ti…</p>
-  <button onclick="begin()">Abrir mi sorpresa</button>
+  <p>Tengo una sorpresa para ti…</p>
+  <button onclick="begin()">Abrir</button>
 </div>
 
-<!-- Carta -->
+<!-- ESCENA -->
 <div class="scene" id="scene">
 
   <div class="envelope" onclick="openLetter(this)">
@@ -123,7 +136,7 @@ button{
 
     <img src="foto.jpg" class="photo">
 
-    <h3>Feliz 14 de febrero ❤️</h3>
+    <h2>Feliz 14 de febrero ❤️</h2>
 
     <p>
       A tu lado entendí lo que significa amar de verdad.
@@ -137,11 +150,12 @@ button{
     </p>
 
     <p><b>Siempre tú y yo.<br>Denis 💖</b></p>
+
   </div>
 
 </div>
 
-<!-- Música -->
+<!-- MUSICA -->
 <audio id="music" loop>
   <source src="perfect.mp3" type="audio/mpeg">
 </audio>
@@ -156,8 +170,12 @@ function begin(){
 function openLetter(element){
   element.classList.toggle("open");
 
-  // Corazones
-  for(let i=0;i<35;i++){
+  // mostrar carta
+  const letter = document.getElementById("letter");
+  setTimeout(()=> letter.classList.add("show"), 400);
+
+  // corazones
+  for(let i=0;i<40;i++){
     let heart = document.createElement("div");
     heart.className="heart";
     heart.innerHTML="❤️";
@@ -165,17 +183,10 @@ function openLetter(element){
     heart.style.fontSize=(Math.random()*20+15)+"px";
     heart.style.animationDuration=(Math.random()*3+3)+"s";
     document.body.appendChild(heart);
-
     setTimeout(()=>heart.remove(),6000);
   }
 
-  // Mostrar carta
-  const letter = document.getElementById("letter");
-  setTimeout(()=>{
-    letter.style.transform = "translateY(0)";
-  }, 400);
-
-  // Scroll automático
+  // scroll auto
   setTimeout(()=>{
     window.scrollTo({
       top: document.body.scrollHeight,
