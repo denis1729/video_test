@@ -9,25 +9,9 @@
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  overflow-x:hidden;
-  background:radial-gradient(circle at top,#ff9a9e,#fad0c4);
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
   text-align:center;
-  color:#333;
-}
-
-/* ✨ luces fondo */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background:radial-gradient(white, transparent 70%);
-  animation:shine 8s linear infinite;
-  opacity:0.15;
-}
-@keyframes shine{
-  from{ transform:translate(-25%,-25%) rotate(0);}
-  to{ transform:translate(-25%,-25%) rotate(360deg);}
+  overflow-x:hidden;
 }
 
 /* INICIO */
@@ -42,13 +26,7 @@ body::before{
 }
 
 .start h1{
-  font-size:38px;
-  animation:glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow{
-  from{ text-shadow:0 0 10px white;}
-  to{ text-shadow:0 0 25px white;}
+  font-size:36px;
 }
 
 button{
@@ -100,16 +78,16 @@ button{
 .letter{
   width:90%;
   max-width:500px;
-  margin:20px auto;
+  margin:20px auto 60px auto;
   background:white;
   padding:20px;
   border-radius:12px;
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
   transform:translateY(50px);
   opacity:0;
-  transition:1s;
+  transition:0.8s;
   font-size:16px;
-  line-height:1.6;
+  line-height:1.5;
 }
 
 .letter.show{
@@ -117,26 +95,11 @@ button{
   opacity:1;
 }
 
-/* slideshow */
-.slider{
-  position:relative;
+/* FOTO */
+.photo{
   width:100%;
-  height:250px;
-  margin-bottom:15px;
-}
-
-.slide{
-  position:absolute;
-  width:100%;
-  height:100%;
   border-radius:12px;
-  object-fit:cover;
-  opacity:0;
-  transition:1s;
-}
-
-.slide.active{
-  opacity:1;
+  margin-bottom:15px;
 }
 
 /* CORAZONES */
@@ -150,13 +113,6 @@ button{
   from{ transform:translateY(0); opacity:1;}
   to{ transform:translateY(-110vh); opacity:0;}
 }
-
-/* FINAL */
-.end{
-  font-size:22px;
-  color:white;
-  margin:40px 0 80px 0;
-}
 </style>
 </head>
 
@@ -164,9 +120,9 @@ button{
 
 <!-- INICIO -->
 <div class="start" id="start">
-  <h1>Ema Román Ortuño ❤️</h1>
-  <p>Preparé algo que nace de mi corazón…</p>
-  <button onclick="begin()">Abrir mi sorpresa</button>
+  <h1>Hola bebe ❤️</h1>
+  <p>Tengo una sorpresa para ti…</p>
+  <button onclick="begin()">Abrir</button>
 </div>
 
 <!-- ESCENA -->
@@ -178,31 +134,23 @@ button{
 
   <div class="letter" id="letter">
 
-    <!-- FOTOS -->
-    <div class="slider">
-      <img src="foto1.jpg" class="slide active">
-      <img src="foto2.jpg" class="slide">
-      <img src="foto3.jpg" class="slide">
-    </div>
+    <img src="foto2.jpg" class="photo">
 
     <h2>Feliz 14 de febrero ❤️</h2>
 
     <p>
-      A tu lado descubrí el verdadero significado del amor.
-      Gracias por tu paciencia, tu fuerza y cada instante
+      A tu lado entendí lo que significa amar de verdad.
+      Gracias por cada abrazo, cada palabra y cada momento
       que construimos juntos.
     </p>
 
     <p>
-      Eres mi hogar, mi paz y mi felicidad diaria.
-      Si volviera a nacer, te elegiría siempre.
+      Si volviera a empezar mi vida,
+      te elegiría una y mil veces más.
     </p>
 
-    <p><b>Con todo mi corazón,<br>Denis 💖</b></p>
-  </div>
+    <p><b>Siempre tú y yo.<br>Denis 💖</b></p>
 
-  <div class="end">
-    Gracias por abrir mi corazón ✨
   </div>
 
 </div>
@@ -222,8 +170,9 @@ function begin(){
 function openLetter(element){
   element.classList.toggle("open");
 
+  // mostrar carta
   const letter = document.getElementById("letter");
-  setTimeout(()=> letter.classList.add("show"), 500);
+  setTimeout(()=> letter.classList.add("show"), 400);
 
   // corazones
   for(let i=0;i<40;i++){
@@ -243,17 +192,8 @@ function openLetter(element){
       top: document.body.scrollHeight,
       behavior: "smooth"
     });
-  }, 1200);
+  }, 800);
 }
-
-/* slideshow automático */
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-setInterval(()=>{
-  slides[index].classList.remove("active");
-  index = (index + 1) % slides.length;
-  slides[index].classList.add("active");
-},3000);
 </script>
 
 </body>
