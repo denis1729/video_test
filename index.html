@@ -3,277 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para Ema ❤️</title>
+  <title>Denis ❤️ Ema</title>
 
   <style>
+/* ======================================================
+   RESET & BASE
+====================================================== */
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
   min-height:100vh;
-
-  background-image:url("inicio.jpg");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-
+  overflow:hidden;
+  background:url("inicio.jpg") center/cover no-repeat fixed;
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow-x:hidden;
-  text-align:center;
-  color:#333;
 }
 
-/* ✨ luces fondo */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background:radial-gradient(white, transparent 70%);
-  animation:shine 8s linear infinite;
-  opacity:0.15;
-}
-@keyframes shine{
-  from{ transform:translate(-25%,-25%) rotate(0);}
-  to{ transform:translate(-25%,-25%) rotate(360deg);}
-}
-
-/* INICIO */
+/* ======================================================
+   PANTALLA INICIAL
+====================================================== */
 .start{
-  height:100vh;
+  position:fixed;
+  inset:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  color:blue;
-  padding:30px;
-
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #ff4da6,
-    0 0 20px #ff4da6,
-    0 0 40px #ff1493;
+  text-align:center;
+  color:white;
+  padding:20px;
+  z-index:5;
 }
 
 .start h1{
-  font-size:38px;
-  animation:glow 2s ease-in-out infinite alternate;
+  font-size:clamp(28px,8vw,60px);
+  text-shadow:0 0 20px #ff4da6,0 0 40px #ff4da6;
 }
 
-@keyframes glow{
-  from{ text-shadow:0 0 10px white;}
-  to{ text-shadow:0 0 25px white;}
-}
-
-button{
-  padding:14px 24px;
-  font-size:28px;
+.start button{
+  margin-top:25px;
+  padding:14px 30px;
+  font-size:22px;
   border:none;
-  border-radius:10px;
-  background:#ff6b81;
-  color:blue;
+  border-radius:12px;
+  background:#ff4da6;
+  color:white;
   cursor:pointer;
-  margin-top:20px;
-
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #ff4da6,
-    0 0 20px #ff4da6,
-    0 0 40px #ff1493;
 }
 
-/* ESCENA */
-.scene{
+/* ======================================================
+   FORMACION
+====================================================== */
+.heart-formation{
+  position:fixed;
+  inset:0;
+  background:black;
   display:none;
-  width:100%;
+  z-index:6;
+}
+#heartCanvas{width:100%;height:100%;}
+
+/* ======================================================
+   ESCENA PRINCIPAL
+====================================================== */
+.scene{
+  position:fixed;
+  inset:0;
+  display:none;
 }
 
-/* SOBRE */
-.envelope{
-  position:relative;
-  width:90%;
-  max-width:500px;
-  height:220px;
-  background:linear-gradient(145deg, #ff8c00, #ff5e00);
-  margin:40px auto;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  overflow:hidden;
-  cursor:pointer;
-
-  /* brillo */
-  box-shadow:
-    0 0 15px rgba(255,140,0,0.8),
-    0 0 30px rgba(255,94,0,0.6),
-    0 0 45px rgba(255,94,0,0.4);
-
-  animation:glow 2s ease-in-out infinite alternate;
-}
-
-.flap{
+/* nombres */
+.names{
   position:absolute;
+  top:5%;
   width:100%;
-  height:100%;
-  background:#ff6b81;
-  clip-path:polygon(0 0,100% 0,50% 55%);
-  transition:0.8s;
-  z-index:2;
+  text-align:center;
+  font-size:clamp(26px,7vw,60px);
+  font-weight:bold;
+  color:white;
+  text-shadow:0 0 10px white,0 0 25px #ff4da6,0 0 50px #ff4da6;
+  animation:pulse 1.5s infinite alternate;
+  z-index:3;
 }
+@keyframes pulse{from{opacity:.7;}to{opacity:1;}}
 
-.envelope.open .flap{
-  transform:translateY(-100%);
-}
-
-/* CARTA */
-.letter{
-  width:90%;
-  max-width:500px;
-  margin:20px auto;
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.15);
-  transform:translateY(50px);
-  opacity:0;
-  transition:1s;
-  font-size:16px;
-  line-height:1.6;
-}
-
-.letter.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-/* slideshow centrado */
+/* ======================================================
+   SLIDER
+====================================================== */
 .slider{
-  position:relative;
+  position:absolute;
+  top:20%;
   width:100%;
-  max-width:450px;
-  height:260px;
-  margin:0 auto 20px auto; /* centra horizontal */
+  height:40vh;
   display:flex;
   justify-content:center;
   align-items:center;
+  z-index:2;
 }
 
 .slide{
   position:absolute;
-  max-width:100%;
-  max-height:100%;
-  border-radius:12px;
-  object-fit:contain; /* muestra completa */
+  width:90%;
+  max-width:420px;
+  height:100%;
+  object-fit:contain;
+  border-radius:18px;
   opacity:0;
-  transition:1s;
+  transition:opacity 1s ease;
 }
+.slide.active{opacity:1;}
 
-.slide.active{
-  opacity:1;
-}
-
-/* CORAZONES */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  animation:float 6s linear infinite;
-}
-
-@keyframes float{
-  from{ transform:translateY(0); opacity:1;}
-  to{ transform:translateY(-110vh); opacity:0;}
-}
-
-/* FINAL */
-.end{
-  font-size:22px;
-  color:blue;
-  margin:40px 0 80px 0;
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #ff4da6,
-    0 0 20px #ff4da6,
-    0 0 40px #ff1493;
-}
-.open-text{
+/* ======================================================
+   CARTA
+====================================================== */
+.letter{
   position:absolute;
-  bottom:15px;
-  width:100%;
+  bottom:5%;
+  left:5%;
+  width:90%;
+  background:rgba(255,255,255,.95);
+  padding:20px;
+  border-radius:18px;
   text-align:center;
-  font-weight:bold;
-  color:white;
-  text-shadow:0 2px 5px rgba(0,0,0,0.4);
-  animation:pulse 1.5s infinite;
-  pointer-events:none;
+  display:none;
+  z-index:3;
 }
 
-
-@keyframes pulse{
-  0%{ transform:translateY(-50%) scale(1); }
-  50%{ transform:translateY(-50%) scale(1.1); }
-  100%{ transform:translateY(-50%) scale(1); }
-}
-
-.ribbon{
+/* ======================================================
+   CORAZONES FLOTANTES
+====================================================== */
+.heart{
   position:absolute;
-  width:140%;
-  height:18px;
-  background:white;
-  top:50%;
-  left:-20%;
+  bottom:-20px;
+  font-size:20px;
+  animation:floatUp linear forwards;
+  z-index:1;
+}
+@keyframes floatUp{
+  to{transform:translateY(-110vh);opacity:0;}
 }
 
-.ribbon1{
-  transform:rotate(45deg);
-}
-
-.ribbon2{
-  transform:rotate(-45deg);
-}
-
-.heart-center{
+/* ======================================================
+   FUEGOS
+====================================================== */
+canvas.fire{
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  font-size:38px;
-  z-index:2;
+  inset:0;
+  z-index:0;
 }
-
-
 </style>
 </head>
 
 <body>
 
-<!-- INICIO -->
+<!-- ======================================================
+     INICIO
+====================================================== -->
 <div class="start" id="start">
-  <h1>FELIZ DIA DE SAN VALENTIN ❤️</h1>
-
-  <h2>Preparé algo que nace de mi corazón…</h2>
-  <button onclick="begin()">Abre la sorpresa</button>
+  <h1>Tengo algo para ti ❤️</h1>
+  <button id="startBtn">Abrir sorpresa</button>
 </div>
 
-<!-- ESCENA -->
+<!-- ======================================================
+     FORMACION
+====================================================== -->
+<div class="heart-formation" id="heartFormation">
+  <canvas id="heartCanvas"></canvas>
+</div>
+
+<!-- ======================================================
+     ESCENA
+====================================================== -->
 <div class="scene" id="scene">
 
-  <div class="envelope" onclick="openLetter(this)">
-    <div class="ribbon ribbon1"></div>
-    <div class="ribbon ribbon2"></div>
+  <div class="names" id="names"></div>
 
-    <div class="heart-center">❤️</div>
-    <div class="open-text">ABRE AQUÍ</div>
+  <div class="slider" id="slider">
+    <img src="foto1.jpg" class="slide active">
+    <img src="foto2.jpg" class="slide">
+    <img src="foto3.jpg" class="slide">
+    <img src="foto4.jpg" class="slide">
+    <img src="foto5.jpg" class="slide">
+    <img src="foto6.jpg" class="slide">
+    <img src="foto7.jpg" class="slide">
+    <img src="foto8.jpg" class="slide">
+    <img src="foto9.jpg" class="slide">
+    <img src="foto10.jpg" class="slide">
+    <img src="foto11.jpg" class="slide">
+    <img src="foto12.jpg" class="slide">
+    <img src="foto13.jpg" class="slide">
   </div>
 
   <div class="letter" id="letter">
-
-    <!-- FOTOS -->
-    <div class="slider">
-      <img src="foto1.jpg" class="slide active">
-      <img src="foto2.jpg" class="slide">
-      <img src="foto3.jpg" class="slide">
-    </div>
-
     <h2>Feliz 14 de febrero ❤️</h2>
 
     <p>
@@ -290,59 +213,221 @@ button{
     <p><b>Con todo mi corazón,<br>Denis 💖</b></p>
   </div>
 
-  <div class="end">
-    <h3>Gracias por todo tu amor ✨</h3>
-  </div>
+  <canvas class="fire" id="fireworks"></canvas>
 
 </div>
 
-<!-- MUSICA -->
 <audio id="music" loop>
-  <source src="perfect.mp3" type="audio/mpeg">
+  <source src="Thousand.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function begin(){
-  document.getElementById("start").style.display="none";
-  document.getElementById("scene").style.display="block";
-  document.getElementById("music").play();
-}
+/* ======================================================
+   CONFIGURACIÓN (EDITAS SOLO AQUÍ)
+====================================================== */
+const CONFIG = {
+  names: "Denis ❤️ Ema",
+  heartColor: "#ff4da6",
+  sliderInterval: 3000,
+  showLetterAfter: 4000
+};
 
-function openLetter(element){
-  element.classList.toggle("open");
+/* ======================================================
+   HELPERS
+====================================================== */
+const $ = id => document.getElementById(id);
 
-  const letter = document.getElementById("letter");
-  setTimeout(()=> letter.classList.add("show"), 500);
+/* ======================================================
+   APP CONTROLLER
+====================================================== */
+const App = (()=>{
 
-  // corazones
-  for(let i=0;i<40;i++){
-    let heart = document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+15)+"px";
-    heart.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),6000);
+  function init(){
+    $("names").textContent = CONFIG.names;
+    $("startBtn").addEventListener("click", start);
   }
 
-  // scroll auto
-  setTimeout(()=>{
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
-  }, 1200);
-}
+  function start(){
+    $("start").style.display="none";
+    $("heartFormation").style.display="block";
 
-/* slideshow automático */
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-setInterval(()=>{
-  slides[index].classList.remove("active");
-  index = (index + 1) % slides.length;
-  slides[index].classList.add("active");
-},3000);
+    HeartEngine.play(()=>{
+      $("heartFormation").style.display="none";
+      $("scene").style.display="block";
+      $("music").play();
+
+      Slider.start();
+      FloatingHearts.start();
+      Fireworks.start();
+
+      setTimeout(()=> $("letter").style.display="block", CONFIG.showLetterAfter);
+    });
+  }
+
+  return { init };
+})();
+
+/* ======================================================
+   HEART ENGINE (neón + letras)
+====================================================== */
+const HeartEngine = (()=>{
+
+  function play(done){
+    const canvas=$("heartCanvas");
+    const ctx=canvas.getContext("2d");
+
+    resize();
+    window.addEventListener("resize",resize);
+
+    const cx=canvas.width/2;
+    const cy=canvas.height/2;
+    const size=Math.min(canvas.width,canvas.height)/40;
+
+    const particles=[];
+
+    for(let i=0;i<260;i++){
+      const t=Math.PI*2*(i/260);
+      const x=16*Math.pow(Math.sin(t),3);
+      const y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+
+      particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        tx:cx+x*size,
+        ty:cy+y*size
+      });
+    }
+
+    let frame=0;
+
+    function animate(){
+      ctx.fillStyle="rgba(0,0,0,.25)";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      particles.forEach(p=>{
+        p.x+=(p.tx-p.x)*.05;
+        p.y+=(p.ty-p.y)*.05;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.shadowColor=CONFIG.heartColor;
+        ctx.shadowBlur=12;
+        ctx.fillStyle=CONFIG.heartColor;
+        ctx.fill();
+      });
+
+      frame++;
+      if(frame<220) requestAnimationFrame(animate);
+      else setTimeout(done,1200);
+    }
+
+    animate();
+
+    function resize(){
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+    }
+  }
+
+  return { play };
+})();
+
+/* ======================================================
+   SLIDER ENGINE
+====================================================== */
+const Slider = (()=>{
+  let i=0,slides;
+
+  function start(){
+    slides=document.querySelectorAll(".slide");
+    setInterval(()=>{
+      slides[i].classList.remove("active");
+      i=(i+1)%slides.length;
+      slides[i].classList.add("active");
+    },CONFIG.sliderInterval);
+  }
+
+  return { start };
+})();
+
+/* ======================================================
+   FLOATING HEARTS
+====================================================== */
+const FloatingHearts = (()=>{
+
+  function start(){
+    setInterval(()=>{
+      const h=document.createElement("div");
+      h.className="heart";
+      h.style.left=Math.random()*100+"%";
+      h.style.animationDuration=(Math.random()*3+3)+"s";
+      h.innerHTML="❤️";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),6000);
+    },300);
+  }
+
+  return { start };
+})();
+
+/* ======================================================
+   FIREWORKS ENGINE
+====================================================== */
+const Fireworks = (()=>{
+
+  const canvas=$("fireworks");
+  const ctx=canvas.getContext("2d");
+  let particles=[];
+
+  function start(){
+    resize();
+    window.addEventListener("resize",resize);
+    setInterval(create,900);
+    animate();
+  }
+
+  function resize(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+  }
+
+  function create(){
+    const x=Math.random()*canvas.width;
+    const y=Math.random()*canvas.height/2;
+
+    for(let i=0;i<40;i++){
+      particles.push({
+        x,y,
+        angle:Math.random()*2*Math.PI,
+        speed:Math.random()*5+2,
+        life:100
+      });
+    }
+  }
+
+  function animate(){
+    ctx.fillStyle="rgba(0,0,0,.2)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach((p,index)=>{
+      p.x+=Math.cos(p.angle)*p.speed;
+      p.y+=Math.sin(p.angle)*p.speed;
+      p.life--;
+
+      ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`;
+      ctx.fillRect(p.x,p.y,3,3);
+
+      if(p.life<=0) particles.splice(index,1);
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  return { start };
+})();
+
+/* ====================================================== */
+App.init();
 </script>
 
 </body>
