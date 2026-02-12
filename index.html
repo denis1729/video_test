@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Denis ❤️ Ema</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denis ❤️ Ema</title>
 
-  <style>
+    <style>
 /* =====================================================
    CONFIGURACION GENERAL
 ===================================================== */
@@ -234,69 +234,69 @@ body{
 
 <!-- ================= INICIO ================= -->
 <div class="start" id="start">
-  <h1>❤️ SORPRESA ❤️</h1>
-  <h2>❤️ Abre tu regalo ❤️</h2>
-  <h2>❤️ Mi amor ❤️</h2>
-  <div class="gift-wrapper">
-    <img id="openBtn" class="gift-gif" src="regalo.gif" alt="Abrir sorpresa">
-  </div>
+    <h1>❤️ SORPRESA ❤️</h1>
+    <h2>❤️ Abre tu regalo ❤️</h2>
+    <h2>❤️ Mi amor ❤️</h2>
+    <div class="gift-wrapper">
+        <img id="openBtn" class="gift-gif" src="regalo.gif" alt="Abrir sorpresa">
+    </div>
 </div>
 
 
 <!-- ================= FORMACION ================= -->
 <div id="heartFormation" class="heart-formation">
-  <canvas id="heartCanvas"></canvas>
+    <canvas id="heartCanvas"></canvas>
 </div>
 
 <!-- ================= ESCENA ================= -->
 <div class="scene" id="scene">
-  <div class="names">
-    <span>D</span>
-    <span>e</span>
-    <span>n</span>
-    <span>i</span>
-    <span>s</span>
-    <span>&nbsp;</span>
-    <span>❤️</span>
-    <span>&nbsp;</span>
-    <span>E</span>
-    <span>m</span>
-    <span>a</span>
-  </div>
+    <div class="names">
+        <span>D</span>
+        <span>e</span>
+        <span>n</span>
+        <span>i</span>
+        <span>s</span>
+        <span>&nbsp;</span>
+        <span>❤️</span>
+        <span>&nbsp;</span>
+        <span>E</span>
+        <span>m</span>
+        <span>a</span>
+    </div>
 
-  <div class="slider" id="slider">
-    <img src="foto100.jpg" class="slide active">
-    <img src="foto20.jpg" class="slide">
-    <img src="foto30.jpg" class="slide">
-    <img src="foto4.jpg" class="slide">
-    <img src="foto5.jpg" class="slide">
-    <img src="foto6.jpg" class="slide">
-    <img src="foto7.jpg" class="slide">
-    <img src="foto9.jpg" class="slide">
-    <img src="foto10.jpg" class="slide">
-    <img src="foto11.jpg" class="slide">
-    <img src="foto12.jpg" class="slide">
-    <img src="foto13.jpg" class="slide">
-  </div>
+    <div class="slider" id="slider">
+        <img src="foto100.jpg" class="slide active">
+        <img src="foto20.jpg" class="slide">
+        <img src="foto30.jpg" class="slide">
+        <img src="foto4.jpg" class="slide">
+        <img src="foto5.jpg" class="slide">
+        <img src="foto6.jpg" class="slide">
+        <img src="foto7.jpg" class="slide">
+        <img src="foto9.jpg" class="slide">
+        <img src="foto10.jpg" class="slide">
+        <img src="foto11.jpg" class="slide">
+        <img src="foto12.jpg" class="slide">
+        <img src="foto13.jpg" class="slide">
+    </div>
 
-  <div class="letter" id="letter">
-    <h2>Feliz 14 de febrero ❤️</h2>
+    <div class="letter" id="letter">
+        <h2>Feliz 14 de febrero ❤️</h2>
 
-    <p>
-      A tu lado descubrí el verdadero significado del amor.
-      Gracias por tu paciencia, tu fuerza y cada instante
-      que construimos juntos.
-    </p>
+        <p>
+            A tu lado descubrí el verdadero significado del amor.
+            Gracias por tu paciencia, tu fuerza y cada instante
+            que construimos juntos.
+        </p>
 
-    <p>
-      Eres mi hogar, mi paz y mi felicidad diaria.
-      Si volviera a nacer, te elegiría siempre.
-    </p>
+        <p>
+            Eres mi hogar, mi paz y mi felicidad diaria.
+            Si volviera a nacer, te elegiría siempre.
+        </p>
 
-    <p><b>Con todo mi corazón,<br>Denis 💖</b></p>
-  </div>
+        <p><b>Con todo mi corazón,<br>Denis 💖</b></p>
+    </div>
 
-  <canvas class="fire" id="fireworks"></canvas>
+    <canvas class="fire" id="fireworks"></canvas>
 
 </div>
 
@@ -304,7 +304,7 @@ body{
 </div>
 
 <audio id="music" loop>
-  <source src="Thousand.mp3" type="audio/mpeg">
+    <source src="Thousand.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -361,11 +361,9 @@ function heartFormationAnimation(callback){
 
   const particles = [];
 
-  /* ==============================
-     CONTORNO DEL CORAZON
-  ============================== */
-  for(let i=0;i<300;i++){
-    const t = Math.PI*2*(i/300);
+  /* contorno */
+  for(let i=0;i<260;i++){
+    const t = Math.PI*2*(i/260);
     const x = 16*Math.pow(Math.sin(t),3);
     const y = -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
 
@@ -373,122 +371,53 @@ function heartFormationAnimation(callback){
       random(canvas.width),
       random(canvas.height),
       centerX + x*size,
-      centerY + y*size,
-      "#ff4da6"
+      centerY + y*size
     ));
   }
 
-  /* ==============================
-     LETRAS E D (COLOR DISTINTO)
-  ============================== */
+  /* letras ED */
   const letters = generateLetters(size);
   letters.forEach(p=>{
     particles.push(createParticle(
       random(canvas.width),
       random(canvas.height),
       centerX+p.x,
-      centerY+p.y,
-      "#00eaff"   // color diferente para resaltar
+      centerY+p.y
     ));
   });
 
   let frame = 0;
 
   function animate(){
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const beat = 1 + Math.sin(frame * 0.2) * 0.05;
-  const glowIndex = frame % particles.length;
-const glowParticle = particles[glowIndex];
-
-ctx.beginPath();
-ctx.arc(glowParticle.x, glowParticle.y, 4, 0, Math.PI*2);
-ctx.fillStyle = "white";
-ctx.shadowBlur = 20;
-ctx.fill();
-
     ctx.fillStyle="rgba(0,0,0,0.25)";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     particles.forEach(p=>{
-      p.x += ((p.tx*beat) - p.x) * 0.05;
-      p.y += ((p.ty*beat) - p.y) * 0.05;
-
+      p.x += (p.tx-p.x)*0.05;
+      p.y += (p.ty-p.y)*0.05;
 
       ctx.beginPath();
       ctx.arc(p.x,p.y,2,0,Math.PI*2);
-      ctx.shadowColor=p.color;
+      ctx.shadowColor="#ff4da6";
       ctx.shadowBlur=12;
-      ctx.fillStyle=p.color;
+      ctx.fillStyle="#ff4da6";
       ctx.fill();
     });
-  sparkleRain(ctx, canvas);
+
     frame++;
     if(frame < CONFIG.heartDuration){
       requestAnimationFrame(animate);
     }else{
-   heartExplosion(ctx, canvas, centerX, centerY);
-   setTimeout(callback,1200);
-}
+      setTimeout(callback,1200);
+    }
   }
 
   animate();
 }
 
-function createParticle(x,y,tx,ty,color){
-  return {x,y,tx,ty,color};
+function createParticle(x,y,tx,ty){
+  return {x,y,tx,ty};
 }
-
-function sparkleRain(ctx, canvas){
-  setInterval(()=>{
-    const x=Math.random()*canvas.width;
-    const y=Math.random()*canvas.height;
-
-    ctx.beginPath();
-    ctx.arc(x,y,1.5,0,Math.PI*2);
-    ctx.fillStyle="white";
-    ctx.shadowColor="#fff";
-    ctx.shadowBlur=10;
-    ctx.fill();
-  },80);
-}
-
-
-function heartExplosion(ctx, canvas, centerX, centerY){
-  const sparks = [];
-
-  for(let i=0;i<120;i++){
-    sparks.push({
-      x:centerX,
-      y:centerY,
-      angle:Math.random()*2*Math.PI,
-      speed:Math.random()*6+2,
-      life:80
-    });
-  }
-
-  function explode(){
-    ctx.fillStyle="rgba(0,0,0,0.2)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    sparks.forEach((s,i)=>{
-      s.x+=Math.cos(s.angle)*s.speed;
-      s.y+=Math.sin(s.angle)*s.speed;
-      s.life--;
-
-      ctx.fillStyle="hsl("+Math.random()*360+",100%,60%)";
-      ctx.fillRect(s.x,s.y,3,3);
-
-      if(s.life<=0) sparks.splice(i,1);
-    });
-
-    if(sparks.length>0){
-      requestAnimationFrame(explode);
-    }
-  }
-
-  explode();
-}
-
 
 function generateLetters(size){
   const points=[];
