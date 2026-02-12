@@ -325,13 +325,12 @@ document.getElementById("openBtn").addEventListener("click", startExperience);
 
 function startExperience(){
   hide("start");
-  playMusic();
   show("heartFormation");
 
   heartFormationAnimation(()=>{
     hide("heartFormation");
     show("scene");
-
+    playMusic();
     startFloatingHearts();
     startSlider();
     setTimeout(()=>show("letter"), CONFIG.letterDelay);
