@@ -6,72 +6,75 @@
   <title>Denis ❤️ Ema</title>
 
   <style>
-/* ======================================================
-   RESET & BASE
-====================================================== */
-*{margin:0;padding:0;box-sizing:border-box;}
+/* =====================================================
+   CONFIGURACION GENERAL
+===================================================== */
+*{box-sizing:border-box;margin:0;padding:0;}
 
 body{
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
   min-height:100vh;
-  overflow:hidden;
   background:url("inicio.jpg") center/cover no-repeat fixed;
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow:hidden;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-/* ======================================================
-   PANTALLA INICIAL
-====================================================== */
+/* =====================================================
+   PANTALLA INICIO
+===================================================== */
 .start{
-  position:fixed;
+  position:absolute;
   inset:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
   color:white;
-  padding:20px;
-  z-index:5;
+  text-align:center;
+  display:inline-block;
+  color:white;
+  text-shadow:
+    0 0 5px white,
+    0 0 10px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 40px #ff4da6;
+
+  animation: disperse 4s ease-in-out infinite;
 }
 
 .start h1{
-  font-size:clamp(28px,8vw,60px);
+  font-size:8vw;
   text-shadow:0 0 20px #ff4da6,0 0 40px #ff4da6;
 }
 
-.start button{
-  margin-top:25px;
-  padding:14px 30px;
-  font-size:22px;
-  border:none;
-  border-radius:12px;
-  background:#ff4da6;
-  color:white;
-  cursor:pointer;
-}
 
-/* ======================================================
-   FORMACION
-====================================================== */
+
+/* =====================================================
+   FORMACION CORAZON
+===================================================== */
 .heart-formation{
   position:fixed;
   inset:0;
   background:black;
   display:none;
-  z-index:6;
+  z-index:10;
 }
-#heartCanvas{width:100%;height:100%;}
 
-/* ======================================================
+#heartCanvas{
+  width:100%;
+  height:100%;
+}
+
+/* =====================================================
    ESCENA PRINCIPAL
-====================================================== */
+===================================================== */
 .scene{
-  position:fixed;
-  inset:0;
   display:none;
+  width:100%;
+  height:100vh;
+  position:relative;
 }
 
 /* nombres */
@@ -80,23 +83,67 @@ body{
   top:5%;
   width:100%;
   text-align:center;
-  font-size:clamp(26px,7vw,60px);
+  font-size: clamp(28px, 7vw, 70px);
   font-weight:bold;
-  color:white;
-  text-shadow:0 0 10px white,0 0 25px #ff4da6,0 0 50px #ff4da6;
-  animation:pulse 1.5s infinite alternate;
-  z-index:3;
+  z-index:2;
 }
-@keyframes pulse{from{opacity:.7;}to{opacity:1;}}
 
-/* ======================================================
-   SLIDER
-====================================================== */
+/* estilo neon */
+.names span{
+  display:inline-block;
+  color:white;
+  text-shadow:
+    0 0 5px white,
+    0 0 10px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 40px #ff4da6;
+
+  animation: disperse 4s ease-in-out infinite;
+}
+
+@keyframes disperse{
+  0%{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+
+  40%{
+    transform:translate(
+      calc((var(--i) - 5) * 10px),
+      calc((var(--i) - 5) * -5px)
+    ) scale(1.3);
+    opacity:0.3;
+  }
+
+  100%{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+}
+
+.names span:nth-child(1){ --i:1 }
+.names span:nth-child(2){ --i:2 }
+.names span:nth-child(3){ --i:3 }
+.names span:nth-child(4){ --i:4 }
+.names span:nth-child(5){ --i:5 }
+.names span:nth-child(6){ --i:6 }
+.names span:nth-child(7){ --i:7 }
+.names span:nth-child(8){ --i:8 }
+.names span:nth-child(9){ --i:9 }
+.names span:nth-child(10){ --i:10 }
+.names span:nth-child(11){ --i:11 }
+
+
+@keyframes glow{
+  from{opacity:0.6;}
+  to{opacity:1;}
+}
+
 .slider{
   position:absolute;
   top:20%;
   width:100%;
-  height:40vh;
+  height:60vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -105,90 +152,126 @@ body{
 
 .slide{
   position:absolute;
-  width:90%;
-  max-width:420px;
+  width:95%;
+  max-width:900px;
   height:100%;
   object-fit:contain;
   border-radius:18px;
   opacity:0;
-  transition:opacity 1s ease;
+  transition:opacity 2s ease;
 }
 .slide.active{opacity:1;}
 
-/* ======================================================
-   CARTA
-====================================================== */
+@media (max-width: 768px){
+
+  .slider{
+    top:13%;
+    height:50vh;   /* menos alto para que entre la carta */
+  }
+
+  .slide{
+    width:95%;
+    max-width:none;   /* elimina el límite de escritorio */
+    height:100%;
+    object-fit:contain;
+  }
+
+}
+
+
+/* carta */
 .letter{
   position:absolute;
   bottom:5%;
   left:5%;
   width:90%;
-  background:rgba(255,255,255,.95);
+  background:white;
+  color:black;
   padding:20px;
-  border-radius:18px;
+  border-radius:15px;
   text-align:center;
   display:none;
-  z-index:3;
+  z-index:2;
 }
 
-/* ======================================================
-   CORAZONES FLOTANTES
-====================================================== */
+/* corazones flotando */
 .heart{
   position:absolute;
-  bottom:-20px;
-  font-size:20px;
-  animation:floatUp linear forwards;
+  bottom:0;
+  animation:floatUp 4s linear forwards;
   z-index:1;
 }
+
 @keyframes floatUp{
-  to{transform:translateY(-110vh);opacity:0;}
+  from{ transform:translateY(0); opacity:1;}
+  to{ transform:translateY(-700px); opacity:0;}
 }
 
-/* ======================================================
-   FUEGOS
-====================================================== */
-canvas.fire{
+/* fuegos */
+.fire{
   position:absolute;
   inset:0;
   z-index:0;
 }
+
+/* regalo */
+.gift-wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* tamaño adaptable */
+.gift-gif{
+  width: clamp(140px, 35vw, 300px);
+  cursor:pointer;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ======================================================
-     INICIO
-====================================================== -->
+<!-- ================= INICIO ================= -->
 <div class="start" id="start">
-  <h1>Tengo algo para ti ❤️</h1>
-  <button id="startBtn">Abrir sorpresa</button>
+  <h1>❤️ SORPRESA ❤️</h1>
+  <h2>❤️ Abre tu regalo ❤️</h2>
+  <h2>❤️ Mi amor ❤️</h2>
+  <div class="gift-wrapper">
+    <img id="openBtn" class="gift-gif" src="regalo.gif" alt="Abrir sorpresa">
+  </div>
 </div>
 
-<!-- ======================================================
-     FORMACION
-====================================================== -->
-<div class="heart-formation" id="heartFormation">
+
+<!-- ================= FORMACION ================= -->
+<div id="heartFormation" class="heart-formation">
   <canvas id="heartCanvas"></canvas>
 </div>
 
-<!-- ======================================================
-     ESCENA
-====================================================== -->
+<!-- ================= ESCENA ================= -->
 <div class="scene" id="scene">
-
-  <div class="names" id="names"></div>
+  <div class="names">
+    <span>D</span>
+    <span>e</span>
+    <span>n</span>
+    <span>i</span>
+    <span>s</span>
+    <span>&nbsp;</span>
+    <span>❤️</span>
+    <span>&nbsp;</span>
+    <span>E</span>
+    <span>m</span>
+    <span>a</span>
+  </div>
 
   <div class="slider" id="slider">
-    <img src="foto1.jpg" class="slide active">
-    <img src="foto2.jpg" class="slide">
-    <img src="foto3.jpg" class="slide">
+    <img src="foto100.jpg" class="slide active">
+    <img src="foto20.jpg" class="slide">
+    <img src="foto30.jpg" class="slide">
     <img src="foto4.jpg" class="slide">
     <img src="foto5.jpg" class="slide">
     <img src="foto6.jpg" class="slide">
     <img src="foto7.jpg" class="slide">
-    <img src="foto8.jpg" class="slide">
     <img src="foto9.jpg" class="slide">
     <img src="foto10.jpg" class="slide">
     <img src="foto11.jpg" class="slide">
@@ -217,183 +300,284 @@ canvas.fire{
 
 </div>
 
+  <canvas id="fireworks" class="fire"></canvas>
+</div>
+
 <audio id="music" loop>
-  <source src="Thousand.mp3" type="audio/mpeg">
+  <source src="thousand.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* ======================================================
-   CONFIGURACIÓN (EDITAS SOLO AQUÍ)
-====================================================== */
+/* =====================================================
+   CONFIGURACION (facil de modificar)
+===================================================== */
 const CONFIG = {
-  names: "Denis ❤️ Ema",
-  heartColor: "#ff4da6",
+  heartDuration: 360,
+  letterDelay: 4000,
   sliderInterval: 3000,
-  showLetterAfter: 4000
+  fireworkInterval: 900
 };
 
-/* ======================================================
-   HELPERS
-====================================================== */
-const $ = id => document.getElementById(id);
+/* =====================================================
+   INICIO DE EXPERIENCIA
+===================================================== */
+document.getElementById("openBtn").addEventListener("click", startExperience);
 
-/* ======================================================
-   APP CONTROLLER
-====================================================== */
-const App = (()=>{
+function startExperience(){
+  hide("start");
+  playMusic();
+  show("heartFormation");
 
-  function init(){
-    $("names").textContent = CONFIG.names;
-    $("startBtn").addEventListener("click", start);
+  heartFormationAnimation(()=>{
+    hide("heartFormation");
+    show("scene");
+
+    startFloatingHearts();
+    startSlider();
+    setTimeout(()=>show("letter"), CONFIG.letterDelay);
+  });
+}
+
+/* =====================================================
+   HELPERS UI
+===================================================== */
+function show(id){ document.getElementById(id).style.display="block"; }
+function hide(id){ document.getElementById(id).style.display="none"; }
+function playMusic(){ document.getElementById("music").play(); }
+
+/* =====================================================
+   CORAZON DESDE PARTICULAS + E D
+===================================================== */
+function heartFormationAnimation(callback){
+
+  const canvas = document.getElementById("heartCanvas");
+  const ctx = canvas.getContext("2d");
+
+  resizeCanvas(canvas);
+  window.addEventListener("resize", ()=>resizeCanvas(canvas));
+
+  const centerX = canvas.width/2;
+  const centerY = canvas.height/2;
+  const size = Math.min(canvas.width, canvas.height)/40;
+
+  const particles = [];
+
+  /* ==============================
+     CONTORNO DEL CORAZON
+  ============================== */
+  for(let i=0;i<300;i++){
+    const t = Math.PI*2*(i/300);
+    const x = 16*Math.pow(Math.sin(t),3);
+    const y = -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+
+    particles.push(createParticle(
+      random(canvas.width),
+      random(canvas.height),
+      centerX + x*size,
+      centerY + y*size,
+      "#ff4da6"
+    ));
   }
 
-  function start(){
-    $("start").style.display="none";
-    $("heartFormation").style.display="block";
+  /* ==============================
+     RELLENO DEL CORAZON
+  ============================== */
+  for(let i=0;i<2000;i++){
 
-    HeartEngine.play(()=>{
-      $("heartFormation").style.display="none";
-      $("scene").style.display="block";
-      $("music").play();
+    const x = (Math.random()*2-1)*18;
+    const y = (Math.random()*2-1)*18;
 
-      Slider.start();
-      FloatingHearts.start();
-      Fireworks.start();
+    // ecuación del corazón
+    const formula = Math.pow(x*x + y*y - 1,3) - x*x*y*y*y;
 
-      setTimeout(()=> $("letter").style.display="block", CONFIG.showLetterAfter);
+    if(formula <= 0){
+      particles.push(createParticle(
+        random(canvas.width),
+        random(canvas.height),
+        centerX + x*size,
+        centerY - y*size,
+        "#ff77aa"
+      ));
+    }
+  }
+
+  /* ==============================
+     LETRAS E D (COLOR DISTINTO)
+  ============================== */
+  const letters = generateLetters(size);
+  letters.forEach(p=>{
+    particles.push(createParticle(
+      random(canvas.width),
+      random(canvas.height),
+      centerX+p.x,
+      centerY+p.y,
+      "#00eaff"   // color diferente para resaltar
+    ));
+  });
+
+  let frame = 0;
+
+  function animate(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const beat = 1 + Math.sin(frame * 0.2) * 0.05;
+  const glowIndex = frame % particles.length;
+const glowParticle = particles[glowIndex];
+
+ctx.beginPath();
+ctx.arc(glowParticle.x, glowParticle.y, 4, 0, Math.PI*2);
+ctx.fillStyle = "white";
+ctx.shadowBlur = 20;
+ctx.fill();
+
+    ctx.fillStyle="rgba(0,0,0,0.25)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+      p.x += ((p.tx*beat) - p.x) * 0.05;
+      p.y += ((p.ty*beat) - p.y) * 0.05;
+
+
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,2,0,Math.PI*2);
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=12;
+      ctx.fillStyle=p.color;
+      ctx.fill();
+    });
+  sparkleRain(ctx, canvas);
+    frame++;
+    if(frame < CONFIG.heartDuration){
+      requestAnimationFrame(animate);
+    }else{
+   heartExplosion(ctx, canvas, centerX, centerY);
+   setTimeout(callback,1200);
+}
+  }
+
+  animate();
+}
+
+function createParticle(x,y,tx,ty,color){
+  return {x,y,tx,ty,color};
+}
+
+function sparkleRain(ctx, canvas){
+  setInterval(()=>{
+    const x=Math.random()*canvas.width;
+    const y=Math.random()*canvas.height;
+
+    ctx.beginPath();
+    ctx.arc(x,y,1.5,0,Math.PI*2);
+    ctx.fillStyle="white";
+    ctx.shadowColor="#fff";
+    ctx.shadowBlur=10;
+    ctx.fill();
+  },80);
+}
+
+
+function heartExplosion(ctx, canvas, centerX, centerY){
+  const sparks = [];
+
+  for(let i=0;i<120;i++){
+    sparks.push({
+      x:centerX,
+      y:centerY,
+      angle:Math.random()*2*Math.PI,
+      speed:Math.random()*6+2,
+      life:80
     });
   }
 
-  return { init };
-})();
+  function explode(){
+    ctx.fillStyle="rgba(0,0,0,0.2)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
-/* ======================================================
-   HEART ENGINE (neón + letras)
-====================================================== */
-const HeartEngine = (()=>{
+    sparks.forEach((s,i)=>{
+      s.x+=Math.cos(s.angle)*s.speed;
+      s.y+=Math.sin(s.angle)*s.speed;
+      s.life--;
 
-  function play(done){
-    const canvas=$("heartCanvas");
-    const ctx=canvas.getContext("2d");
+      ctx.fillStyle="hsl("+Math.random()*360+",100%,60%)";
+      ctx.fillRect(s.x,s.y,3,3);
 
-    resize();
-    window.addEventListener("resize",resize);
+      if(s.life<=0) sparks.splice(i,1);
+    });
 
-    const cx=canvas.width/2;
-    const cy=canvas.height/2;
-    const size=Math.min(canvas.width,canvas.height)/40;
-
-    const particles=[];
-
-    for(let i=0;i<260;i++){
-      const t=Math.PI*2*(i/260);
-      const x=16*Math.pow(Math.sin(t),3);
-      const y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
-
-      particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        tx:cx+x*size,
-        ty:cy+y*size
-      });
-    }
-
-    let frame=0;
-
-    function animate(){
-      ctx.fillStyle="rgba(0,0,0,.25)";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-
-      particles.forEach(p=>{
-        p.x+=(p.tx-p.x)*.05;
-        p.y+=(p.ty-p.y)*.05;
-
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,2,0,Math.PI*2);
-        ctx.shadowColor=CONFIG.heartColor;
-        ctx.shadowBlur=12;
-        ctx.fillStyle=CONFIG.heartColor;
-        ctx.fill();
-      });
-
-      frame++;
-      if(frame<220) requestAnimationFrame(animate);
-      else setTimeout(done,1200);
-    }
-
-    animate();
-
-    function resize(){
-      canvas.width=window.innerWidth;
-      canvas.height=window.innerHeight;
+    if(sparks.length>0){
+      requestAnimationFrame(explode);
     }
   }
 
-  return { play };
-})();
+  explode();
+}
 
-/* ======================================================
-   SLIDER ENGINE
-====================================================== */
-const Slider = (()=>{
-  let i=0,slides;
 
-  function start(){
-    slides=document.querySelectorAll(".slide");
-    setInterval(()=>{
-      slides[i].classList.remove("active");
-      i=(i+1)%slides.length;
-      slides[i].classList.add("active");
-    },CONFIG.sliderInterval);
+function generateLetters(size){
+  const points=[];
+  const ox=-size*4;
+  const oy=size;
+
+  for(let i=-4;i<=4;i++) points.push({x:ox, y:oy+i*5});
+  for(let i=0;i<=6;i++){
+    points.push({x:ox+i*4, y:oy+20});
+    points.push({x:ox+i*4, y:oy});
+    points.push({x:ox+i*4, y:oy-20});
   }
 
-  return { start };
-})();
-
-/* ======================================================
-   FLOATING HEARTS
-====================================================== */
-const FloatingHearts = (()=>{
-
-  function start(){
-    setInterval(()=>{
-      const h=document.createElement("div");
-      h.className="heart";
-      h.style.left=Math.random()*100+"%";
-      h.style.animationDuration=(Math.random()*3+3)+"s";
-      h.innerHTML="❤️";
-      document.body.appendChild(h);
-      setTimeout(()=>h.remove(),6000);
-    },300);
+  const dx=size*2;
+  for(let i=-4;i<=4;i++) points.push({x:dx, y:oy+i*5});
+  for(let a=-90;a<=90;a+=10){
+    const r=a*Math.PI/180;
+    points.push({x:dx+Math.cos(r)*20, y:oy+Math.sin(r)*20});
   }
 
-  return { start };
-})();
+  return points;
+}
 
-/* ======================================================
-   FIREWORKS ENGINE
-====================================================== */
-const Fireworks = (()=>{
+/* =====================================================
+   CORAZONES FLOTANTES
+===================================================== */
+function startFloatingHearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.style.left=random(100)+"%";
+    h.innerHTML="❤️";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },300);
+}
 
-  const canvas=$("fireworks");
+/* =====================================================
+   SLIDER
+===================================================== */
+function startSlider(){
+  const slides=document.querySelectorAll(".slide");
+  let i=0;
+
+  setInterval(()=>{
+    slides[i].classList.remove("active");
+    i=(i+1)%slides.length;
+    slides[i].classList.add("active");
+  }, CONFIG.sliderInterval);
+}
+
+/* =====================================================
+   FUEGOS ARTIFICIALES
+===================================================== */
+(function fireworks(){
+  const canvas=document.getElementById("fireworks");
   const ctx=canvas.getContext("2d");
+
+  resizeCanvas(canvas);
+  window.addEventListener("resize", ()=>resizeCanvas(canvas));
+
   let particles=[];
 
-  function start(){
-    resize();
-    window.addEventListener("resize",resize);
-    setInterval(create,900);
-    animate();
-  }
-
-  function resize(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-  }
-
   function create(){
-    const x=Math.random()*canvas.width;
-    const y=Math.random()*canvas.height/2;
+    const x=random(canvas.width);
+    const y=random(canvas.height/2);
 
     for(let i=0;i<40;i++){
       particles.push({
@@ -406,7 +590,7 @@ const Fireworks = (()=>{
   }
 
   function animate(){
-    ctx.fillStyle="rgba(0,0,0,.2)";
+    ctx.fillStyle="rgba(0,0,0,0.2)";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     particles.forEach((p,index)=>{
@@ -423,11 +607,22 @@ const Fireworks = (()=>{
     requestAnimationFrame(animate);
   }
 
-  return { start };
+  setInterval(create, CONFIG.fireworkInterval);
+  animate();
 })();
 
-/* ====================================================== */
-App.init();
+/* =====================================================
+   UTILS
+===================================================== */
+function resizeCanvas(c){
+  c.width=window.innerWidth;
+  c.height=window.innerHeight;
+}
+
+function random(max){
+  return Math.random()*max;
+}
+
 </script>
 
 </body>
